@@ -40,6 +40,12 @@ img { max-width: 100%; display: block; }
 .btn:hover { opacity: 0.9; }
 
 /* Header (ОНОВЛЕНО ДЛЯ НАВІГАЦІЇ) */
+/* Ховаємо чекбокс і бургер на великих екранах */
+.header__checkbox,
+.header__hamburger {
+    display: none;
+}
+
 .header {
     padding: 20px 0; /* Трохи зменшив відступи, щоб при скролі хедер не займав забагато місця */
     display: flex;

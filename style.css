@@ -57,6 +57,11 @@ img {
 }
 
 /* Header (ОНОВЛЕНО ДЛЯ НАВІГАЦІЇ) */
+/* Ховаємо чекбокс і бургер на великих екранах (десктопі) */
+.header__checkbox,
+.header__hamburger {
+    display: none;
+}
 .header {
     padding: 20px 0; /* Трохи зменшив відступи, щоб при скролі хедер не займав забагато місця */
     display: flex;
@@ -774,41 +779,132 @@ img {
     }
 }
 
-/* Мобільні телефони (екрани до 768px) */
-@media (max-width: 768px) {
-    /* Header */
-    .header {
+/* =========================================
+   АДАПТИВНІСТЬ ТА БУРГЕР-МЕНЮ (Медіа-запити)
+   ========================================= */
+
+/* 1. ПЛАНШЕТИ ТА БУРГЕР-МЕНЮ (екрани до 992px) */
+@media (max-width: 992px) {
+    /* Hero */
+    .hero {
         flex-direction: column;
-        gap: 20px;
-        padding: 15px 0;
+        text-align: center;
+    }
+    .hero__content {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero__description {
+        margin: 0 auto 40px;
+    }
+    .hero__image-wrapper {
+        width: 80%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    /* Зміна сіток з 3 на 2 колонки */
+    .features__grid,
+    .menu__grid,
+    .reviews__grid,
+    .how-it-works__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .features__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Footer: 2 колонки */
+    .footer {
+        flex-wrap: wrap;
+    }
+    .footer__col {
+        flex: 1 1 40%; 
+    }
+
+    /* --- РОБИМО БУРГЕР-МЕНЮ --- */
+    .header {
+        padding: 15px 20px;
     }
     .header__logo-img {
         margin-left: 0;
+        position: relative;
+        z-index: 1002;
     }
-    .header__nav {
-        margin-right: 0;
+    .header__checkbox {
+        display: none;
+    }
+    
+    /* Показуємо бургер */
+    .header__hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    .hamburger-line {
+        display: block;
+        height: 3px;
         width: 100%;
-    }
-    .header__menu {
-        justify-content: center;
-        flex-wrap: wrap; /* Дозволяємо пунктам переноситись на новий рядок */
-        gap: 15px;
+        background-color: var(--primary-green);
+        border-radius: 3px;
+        transition: all 0.3s ease;
     }
 
-    /* Типографіка: зменшуємо величезні заголовки */
+    /* Анімація перетворення на хрестик */
+    .header__checkbox:checked + .header__hamburger .hamburger-line:nth-child(1) {
+        transform: translateY(9.5px) rotate(45deg);
+    }
+    .header__checkbox:checked + .header__hamburger .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    .header__checkbox:checked + .header__hamburger .hamburger-line:nth-child(3) {
+        transform: translateY(-9.5px) rotate(-45deg);
+    }
+
+    /* Ховаємо меню за замовчуванням */
+    .header__nav {
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-light);
+        box-shadow: 0 15px 15px rgba(0, 0, 0, 0.05);
+        max-height: 0; /* Меню згорнуте */
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        z-index: 1000;
+    }
+    .header__menu {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 0;
+        text-align: center;
+        margin: 0;
+    }
+
+    /* МАГІЯ: Розгортаємо меню при кліку */
+    .header__checkbox:checked ~ .header__nav {
+        max-height: 400px;
+    }
+}
+
+/* 2. МОБІЛЬНІ ТЕЛЕФОНИ (екрани до 768px) */
+@media (max-width: 768px) {
     .hero__title {
         font-size: 40px;
     }
-    .features__title, 
-    .menu__title, 
-    .reviews__title, 
-    .how-it-works__title, 
-    .faq__title, 
-    .subscribe__title,
-    .page-header__title {
+    .features__title, .menu__title, .reviews__title, 
+    .how-it-works__title, .faq__title, .subscribe__title {
         font-size: 32px;
     }
-    
     .hero__stats {
         gap: 20px;
         justify-content: center;
@@ -816,14 +912,10 @@ img {
     }
 
     /* Всі сітки в 1 колонку */
-    .features__grid,
-    .menu__grid,
-    .reviews__grid,
-    .how-it-works__grid {
+    .features__grid, .menu__grid, .reviews__grid, .how-it-works__grid {
         grid-template-columns: 1fr;
     }
 
-    /* FAQ */
     .faq-item__question {
         font-size: 16px;
         padding: 20px;
@@ -846,7 +938,7 @@ img {
         width: 100%;
     }
 
-    /* Footer: 1 колонка, все по центру */
+    /* Footer: 1 колонка */
     .footer {
         flex-direction: column;
         text-align: center;
@@ -858,15 +950,12 @@ img {
     .footer__col--brand {
         margin: 0 auto;
     }
-    .footer__list--contact li {
-        justify-content: center;
-    }
-    .footer__socials {
+    .footer__list--contact li, .footer__socials {
         justify-content: center;
     }
 }
 
-/* Дрібні мобілки (до 480px) */
+/* 3. Дрібні мобілки (до 480px) */
 @media (max-width: 480px) {
     .hero__title {
         font-size: 32px;
