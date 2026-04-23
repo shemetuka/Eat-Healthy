@@ -1,0 +1,877 @@
+/* Базові налаштування та змінні */
+:root {
+    --primary-green: #81A832;
+    --badge-bg: #E3F0D3;
+    --text-dark: #333333;
+    --text-gray: #6B6B6B;
+    --bg-light: #FFFFFF;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.text-green {
+    color: var(--primary-green);
+}
+
+.btn {
+    background-color: var(--primary-green);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 35px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Header (ОНОВЛЕНО ДЛЯ НАВІГАЦІЇ) */
+.header {
+    padding: 20px 0; /* Трохи зменшив відступи, щоб при скролі хедер не займав забагато місця */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Додаємо "липкість" */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Щоб хедер гарантовано був поверх усіх інших секцій та фотографій */
+    background-color: var(--bg-light); /* Білий фон обов'язковий */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Легка тінь для відокремлення від контенту */
+}
+
+.header__logo-img {
+    margin-left: 20px;
+    height: 35px;
+}
+
+.header__nav {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header__menu {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.header__link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.header__link:hover {
+    color: var(--primary-green);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+    gap: 40px;
+}
+
+.hero__content {
+    max-width: 500px;
+}
+
+.hero__badge {
+    display: inline-block;
+    background-color: var(--badge-bg);
+    color: var(--primary-green);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.hero__title {
+    font-size: 64px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.hero__description {
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    font-size: 16px;
+    max-width: 400px;
+}
+
+.hero__stats {
+    display: flex;
+    gap: 50px;
+    margin-top: 60px;
+}
+
+.stat__number {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.stat__label {
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.hero__image-wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Features Section (Тепер id="about") */
+.features {
+    padding: 80px 0;
+}
+
+.features__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    gap: 40px;
+}
+
+.features__title {
+    font-size: 40px;
+    line-height: 1.2;
+    flex: 1;
+}
+
+.features__description {
+    color: var(--text-gray);
+    flex: 1;
+    max-width: 500px;
+}
+
+.features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature-card {
+    background: #FFFFFF;
+    border: 1px solid #F0F0F0;
+    border-radius: 40px;
+    padding: 50px 40px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-card:hover,
+.feature-card--active {
+    transform: scale(1.03);
+    box-shadow: 0 20px 50px rgba(129, 168, 50, 0.15);
+    border-color: transparent;
+}
+
+.feature-card__icon {
+    width: 60px;
+    margin-bottom: 30px;
+}
+
+.feature-card__title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.feature-card__text {
+    color: var(--text-gray);
+    font-size: 14px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.feature-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-gray);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    margin-left: -25px;
+}
+
+.feature-card:hover .feature-card__link,
+.feature-card--active .feature-card__link {
+    background-color: var(--primary-green);
+    color: #FFFFFF;
+}
+
+/* НОВА СЕКЦІЯ: Menu */
+.menu-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(129, 168, 50, 0.15);
+    background-color: #FFFFFF;
+}
+
+.menu {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.menu__title {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.menu__subtitle {
+    color: var(--text-gray);
+    margin-bottom: 50px;
+}
+
+.menu__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.menu-item {
+    background: #F9FBFC;
+    border-radius: 30px;
+    padding: 30px;
+    text-align: left;
+}
+
+.menu-item__img-wrapper {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.menu-item__img-wrapper img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-item__title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.menu-item__price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-green);
+}
+
+/* НОВА СЕКЦІЯ: Reviews */
+.reviews {
+    padding: 80px 0;
+}
+
+.reviews__header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.reviews__title {
+    font-size: 40px;
+}
+
+.reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.review-card {
+    background-color: #F9FBFC; /* Легкий фон для карток */
+    border-radius: 40px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Плавна анімація з відскоком */
+}
+
+/* Ховер-ефект: картка підіймається і з'являється тінь */
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(129, 168, 50, 0.15);
+    background-color: #FFFFFF;
+}
+
+.review-card__img-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 50%; /* Робить фотографії круглими */
+    overflow: hidden;
+    border: 3px solid var(--primary-green); /* Зелена рамочка навколо фото */
+}
+
+.review-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Фотографія красиво заповнює круг без спотворень */
+}
+
+.review-card__text {
+    font-size: 16px;
+    color: var(--text-gray);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.review-card__author {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-dark);
+}
+
+/* =========================================
+   НОВА СЕКЦІЯ: Як це працює (How it works)
+   ========================================= */
+.how-it-works {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.how-it-works__header {
+    margin-bottom: 70px;
+}
+
+.how-it-works__title {
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+.how-it-works__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    position: relative;
+}
+
+/* Створюємо лінію, що з'єднує кроки на фоні */
+.how-it-works__grid::before {
+    content: '';
+    position: absolute;
+    top: 150px; /* Приблизно центр круглих картинок */
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: dashed 2px var(--badge-bg);
+    z-index: 0;
+}
+
+.step {
+    position: relative;
+    z-index: 1; /* Щоб картки були над лінією */
+    background-color: var(--bg-light);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* Центральний крок трохи опущений для ефекту "хвилі" */
+.step--down {
+    transform: translateY(40px);
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+.step--down:hover {
+    transform: translateY(35px);
+}
+
+.step__number {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--badge-bg);
+    opacity: 0.5;
+    line-height: 1;
+    z-index: -1;
+}
+
+.step__img-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 10px solid #FFFFFF;
+    box-shadow: 0 15px 35px rgba(129, 168, 50, 0.15);
+}
+
+.step__img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.step__title {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.step__text {
+    color: var(--text-gray);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   НОВА СЕКЦІЯ: Інтерактивний FAQ
+   ========================================= */
+.faq {
+    padding: 100px 0;
+    background-color: #F9FBFC; /* Легкий фон для відділення секції */
+}
+
+.faq__container {
+    max-width: 800px; /* Звужуємо для зручності читання */
+    margin: 0 auto;
+}
+
+.faq__header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.faq__title {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Стилізація самого тегу details */
+.faq-item {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+    border-color: var(--badge-bg);
+    box-shadow: 0 10px 30px rgba(129, 168, 50, 0.1);
+}
+
+/* Ховаємо стандартний трикутник браузера */
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item__question {
+    list-style: none; /* Для інших браузерів */
+    padding: 25px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+.faq-item__question:hover {
+    color: var(--primary-green);
+}
+
+/* Кастомний "плюсик" за допомогою CSS */
+.faq-item__question::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--primary-green);
+    background-color: var(--badge-bg);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Перетворюємо "плюсик" на "хрестик" коли відкрито */
+.faq-item[open] .faq-item__question::after {
+    transform: rotate(45deg);
+    background-color: var(--primary-green);
+    color: #FFFFFF;
+}
+
+.faq-item__answer {
+    padding: 0 30px 30px 30px;
+    color: var(--text-gray);
+    line-height: 1.8;
+    font-size: 15px;
+    animation: fadeInDown 0.4s ease-in-out;
+}
+
+/* Легка анімація появи тексту */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* =========================================
+   НОВА СЕКЦІЯ: Promo / Subscribe
+   ========================================= */
+.subscribe {
+    padding: 60px 0 100px;
+}
+
+.subscribe__container {
+    background-color: #B4CC86;
+    border-radius: 40px;
+    padding: 70px;
+    text-align: center;
+}
+
+.subscribe__subtitle {
+    color: var(--primary-green);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.subscribe__title {
+    font-size: 40px;
+    color: #2D3A1B;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.subscribe__description {
+    color: #4A5B32;
+    margin-bottom: 40px;
+}
+
+.subscribe__form {
+    display: flex;
+    max-width: 550px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 8px;
+    border-radius: 40px;
+}
+
+.subscribe__input {
+    flex: 1;
+    border: none;
+    padding: 0 25px;
+    border-radius: 40px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 0;
+    gap: 30px;
+}
+
+.footer__col--brand {
+    max-width: 250px;
+}
+
+.footer__logo-link {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer__logo {
+    height: 30px;
+}
+
+.footer__text {
+    color: var(--text-gray);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.footer__copyright {
+    font-size: 12px;
+    color: var(--text-gray);
+    margin-top: 40px;
+}
+
+.footer__title {
+    color: var(--primary-green);
+    font-size: 16px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.footer__list {
+    list-style: none;
+}
+
+.footer__list li {
+    margin-bottom: 15px;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer__link:hover {
+    color: var(--primary-green);
+}
+
+.footer__list--contact li {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+.footer__icon {
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.footer__socials {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer__socials img {
+    width: 35px;
+    transition: transform 0.3s ease;
+}
+
+.footer__socials a:hover img {
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   АДАПТИВНІСТЬ (Медіа-запити)
+   ========================================= */
+
+/* Планшети (екрани до 992px) */
+@media (max-width: 992px) {
+    /* Hero */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero__content {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero__description {
+        margin: 0 auto 40px;
+    }
+    .hero__image-wrapper {
+        width: 80%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    /* Зміна сіток з 3 на 2 колонки */
+    .features__grid,
+    .menu__grid,
+    .reviews__grid,
+    .how-it-works__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Вимикаємо "хвилю" і лінію для секції Process, бо ламається симетрія */
+    .how-it-works__grid::before {
+        display: none; 
+    }
+    .step--down {
+        transform: translateY(0); 
+    }
+    .step--down:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Footer: 2 колонки */
+    .footer {
+        flex-wrap: wrap;
+    }
+    .footer__col {
+        flex: 1 1 40%; 
+    }
+}
+
+/* Мобільні телефони (екрани до 768px) */
+@media (max-width: 768px) {
+    /* Header */
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 0;
+    }
+    .header__logo-img {
+        margin-left: 0;
+    }
+    .header__nav {
+        margin-right: 0;
+        width: 100%;
+    }
+    .header__menu {
+        justify-content: center;
+        flex-wrap: wrap; /* Дозволяємо пунктам переноситись на новий рядок */
+        gap: 15px;
+    }
+
+    /* Типографіка: зменшуємо величезні заголовки */
+    .hero__title {
+        font-size: 40px;
+    }
+    .features__title, 
+    .menu__title, 
+    .reviews__title, 
+    .how-it-works__title, 
+    .faq__title, 
+    .subscribe__title,
+    .page-header__title {
+        font-size: 32px;
+    }
+    
+    .hero__stats {
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Всі сітки в 1 колонку */
+    .features__grid,
+    .menu__grid,
+    .reviews__grid,
+    .how-it-works__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* FAQ */
+    .faq-item__question {
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    /* Subscribe Form */
+    .subscribe__container {
+        padding: 40px 20px;
+    }
+    .subscribe__form {
+        flex-direction: column;
+        background: transparent;
+        gap: 15px;
+    }
+    .subscribe__input {
+        padding: 15px 25px;
+        background: #FFFFFF;
+    }
+    .subscribe__btn {
+        width: 100%;
+    }
+
+    /* Footer: 1 колонка, все по центру */
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .footer__col {
+        flex: 1 1 100%;
+    }
+    .footer__col--brand {
+        margin: 0 auto;
+    }
+    .footer__list--contact li {
+        justify-content: center;
+    }
+    .footer__socials {
+        justify-content: center;
+    }
+}
+
+/* Дрібні мобілки (до 480px) */
+@media (max-width: 480px) {
+    .hero__title {
+        font-size: 32px;
+    }
+    .hero__image-wrapper {
+        width: 100%;
+    }
+}
